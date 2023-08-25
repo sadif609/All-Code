@@ -4,41 +4,26 @@
 using namespace std;
 #define ll long long
 #define N  INT_MAX
+string s[30];
 void solve()
 {
 
-    ll n,m,k=0;
-    cin>>n>>m;
-    stack<string>a[n];
-    for(int i=0;i<n;i++)
-    {
-        string s;
-        cin>>s;
-
-        for(int j=0;j<m;j++)
-        {
-            if(s[j]=='v')
-            {
-                k=1;
-            }
-            if(s[j]=='i' && k==1)
-            {
-                k=2;
-            }
-            if(s[j]=='k' && k==2)
-            {
-                k=3;
-            }
-            if(s[j]=='a' && k==3)
-            {
-                k=4;
-            }
-
-        }
-
-
-    }
-    for()
+   int n,m;cin>>n>>m;
+	for(int i=0;i<n;i++)cin>>s[i];
+	string ned="vika";
+	int t=0;
+	for(int i=0;i<m;i++)
+	{
+		for(int j=0;j<n;j++)
+		{
+			if(s[j][i]==ned[t])
+			{
+				t++;break;
+			}
+		}
+	}
+	if(t==4)cout<<"YES"<<endl;
+	else cout<<"NO"<<endl;
 
 
 }
