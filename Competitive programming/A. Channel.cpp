@@ -2,7 +2,8 @@
 using namespace std;
 #define ll long long
 #define N  INT_MAX
-void solve(){
+void solve()
+{
     ll a,b,c;
     cin>>a>>b>>c;
     string s;
@@ -10,11 +11,13 @@ void solve(){
     ll p=b,m=b,k=b;
     if(a==b)
         cout<<"YES"<<endl;
-    else{
-        for(ll i=0;i<s.size();i++)
+    else
+    {
+        for(ll i=0; i<s.size(); i++)
         {
-            if(s[i]=='-'){
-                   p--;
+            if(s[i]=='-')
+            {
+                p--;
 
             }
             if(s[i]=='+')
@@ -25,9 +28,9 @@ void solve(){
             m=max(m,p);
         }
 
-      if(m>=a)
+        if(m>=a)
             cout<<"YES"<<endl;
-       else  if(k>=a )
+        else  if(k>=a )
             cout<<"MAYBE"<<endl;
         else
             cout<<"NO"<<endl;
