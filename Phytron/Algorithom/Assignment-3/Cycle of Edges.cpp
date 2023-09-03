@@ -1,22 +1,22 @@
 #include<bits/stdc++.h>
-#define ll long long
+#define ll int
 
 using namespace std;
-const int N=1e7+5;
+const int N=1e5+7;
 
 vector<int> parent;
 
-int find(int node)
+int find(ll node)
 {
     if (parent[node] == -1)
         return node;
     return find(parent[node]);
 }
 
-void unionNodes(int u, int v)
+void unionNodes(ll u, ll v)
 {
-    int uParent = find(u);
-    int vParent = find(v);
+    ll uParent = find(u);
+    ll vParent = find(v);
 
     if (uParent != vParent)
     {
@@ -24,15 +24,15 @@ void unionNodes(int u, int v)
     }
 }
 
-int countEdges(int n, vector<pair<int, int>>& edges)
+int countEdges(ll n, vector<pair<ll, ll>>& edges)
 {
-    parent.assign(N + 1, -1);
-    int cycleEdges = 0;
+    parent.assign(n + 1, -1);
+    ll cycleEdges = 0;
 
     for (auto edge : edges)
     {
-        int u = edge.first;
-        int v = edge.second;
+        ll u = edge.first;
+        ll v = edge.second;
 
         if (find(u) == find(v))
         {
@@ -53,16 +53,16 @@ int main()
     ll n, e;
     cin >> n >> e;
 
-    vector<pair<int, int>> edges;
+    vector<pair<ll, ll>> edges;
 
-    for (int i = 0; i < e; i++)
+    for (ll i = 0; i < e; i++)
     {
-        int a, b;
+        ll a, b;
         cin >> a >> b;
         edges.push_back({a, b});
     }
 
-    int result = countEdges(N, edges);
+    ll result = countEdges(n, edges);
 
     cout << result << endl;
 

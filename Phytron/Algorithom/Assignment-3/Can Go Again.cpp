@@ -1,79 +1,101 @@
 #include <bits/stdc++.h>
-#define ll long long
-const ll INF = 1e18 + 5;
 using namespace std;
-
-struct Edge {
-    ll src, dest, weight;
+#define ll long long
+const ll INF=1e18+2;
+const ll N = 1e3+2;
+ll dis[N + 1];
+bool cycle = false;
+ll n, e,s;
+class Edge
+{
+public:
+    ll u;
+    ll v;
+    ll w;
+    Edge(ll u, ll v, ll w)
+    {
+        this->u = u;
+        this->v = v;
+        this->w = w;
+    }
 };
 
-bool bellmanFord(vector<Edge>& edges, ll V, ll E, ll src, vector<ll>& distance) {
-    distance[src] = 0;
 
-    for (ll i = 0; i < V - 1; ++i) {
-        for (ll j = 0; j < E; ++j) {
-            ll u = edges[j].src;
-            ll v = edges[j].dest;
-            ll weight = edges[j].weight;
-            if (distance[u] != INF && distance[u] + weight < distance[v]) {
-                distance[v] = distance[u] + weight;
+
+int main()
+{
+    cin >> n >> e;
+    vector<Edge> v;
+
+    while (e--)
+    {
+        int a, b, w;
+        cin >> a >> b >> w;
+        Edge ed(a, b, w);
+        v.push_back(ed);
+    }
+    ll q;
+    cin>>s>>q;
+
+
+    for (ll i = 1; i <= N; i++)
+    {
+        dis[i] = INF;
+    }
+    dis[s] = 0;
+    for (ll i = 1; i <= n - 1; i++)
+    {
+        for (ll j = 0; j <v.size(); j++)
+        {
+            Edge ed = v[j];
+            ll a = ed.u;
+            ll b = ed.v;
+            ll w = ed.w;
+            if ( dis[a]!=INF && dis[a] + w < dis[b])
+            {
+                dis[b] = dis[a] + w;
             }
         }
     }
+    for (ll j = 0; j < v.size(); j++)
+    {
+        Edge ed = v[j];
+        ll a = ed.u;
+        ll b = ed.v;
+        ll w = ed.w;
+        if (dis[a] + w < dis[b])
+        {
+            cycle = true;
+            break;
 
-    // Check for negative weight cycles
-    for (ll i = 0; i < E; ++i) {
-        ll u = edges[i].src;
-        ll v = edges[i].dest;
-        ll weight = edges[i].weight;
-        if (distance[u] != INF && distance[u] + weight < distance[v]) {
-            return true;
         }
     }
+    ll k=0;
 
-    return false;
-}
 
-int main() {
-    ll N, E;
-    cin >> N >> E;
+    if (cycle)
+    {
+        k=1;
 
-    vector<Edge> edges(E);
-
-    for (ll i = 0; i < E; ++i) {
-        cin >> edges[i].src >> edges[i].dest >> edges[i].weight;
     }
+    while(q--)
+    {
+        ll d;
+        cin>>d;
+        if(k==0 )
+        {
+            if(dis[d]==INF || dis[d]>=INF-1000)
+                cout<<"Not Possible"<<endl;
+            else
+                cout<<dis[d]<<endl;
 
-    ll S;
-    cin >> S;
-
-    ll T;
-    cin >> T;
-    vector<ll> v;
-
-    while (T--) {
-        ll D;
-        cin >> D;
-
-        vector<ll> distance(N, INF);
-
-        if (bellmanFord(edges, N, E, S, distance)) {
-            cout << "Negative Cycle Detected" << endl;
-            return 0;  // Terminate immediately if a negative cycle is found
-        } else if (distance[D] == INF) {
-            v.push_back(INF);
-        } else {
-            v.push_back(distance[D]);
         }
-    }
 
-    for (auto i : v) {
-        if (i == INF) {
-            cout << "Not Possible" << endl;
-        } else {
-            cout << i << endl;
-        }
     }
+    if(k)
+        cout<<"Negative Cycle Detected"<<endl;
+
+
 
     return 0;
 }
