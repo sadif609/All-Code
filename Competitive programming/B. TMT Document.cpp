@@ -1,42 +1,50 @@
-
-
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 #define ll long long
-#define N  INT_MAX
-
-
+bool solve(string s)
+{
+    int m=0,t=0;
+    for(int i=0; i<s.size(); i++)
+    {
+        if(s[i]=='M')
+            m++;
+        else
+            t++;
+        if(m>t)
+            return false;
+    }
+    return true;
+}
 int main()
 {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout<<fixed<<setprecision(2);
-    int test_case;
-    cin>>test_case;
-    while(test_case--)
+    int t;
+    cin>>t;
+    while(t--)
     {
-        ll n;
+        int n;
         cin>>n;
-        string a,b,r;
-        cin>>a;
-        if(a[0]=='M')
+        string s;
+        cin>>s;
+        int M=0,T=0;
+        for(int i=0; i<s.size(); i++)
         {
-            cout<<"NO"<<endl;
-            continue;
+            if(s[i]=='T')T++;
+            else M++;
         }
-        ll t=0,m=0;
-        for(ll i=0;i<n;i++)
-        {
-            if(a[i]=='T')
-                t++;
-            else
-                m++;
-        }
-        if(t/2==m)
-            cout<<"YES"<<endl;
+        if(2*M != T)cout<<"NO"<<endl;
         else
-            cout<<"NO"<<endl;
-
-
+        {
+            if(solve(s)==true)
+            {
+                reverse(s.begin(),s.end());
+                if(solve(s)==true)
+                    cout<<"YES"<<endl;
+                else
+                    cout<<"NO"<<endl;
+            }
+            else
+                cout<<"NO"<<endl;
+        }
     }
+    return 0;
 }
