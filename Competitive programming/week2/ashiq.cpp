@@ -22,9 +22,13 @@ int main()
             for(int j=0,y=n-1; j<n/2; j++,y--)
             {
                 if(s[i][j]!=s[i][y])
+                {
                     k++;
+                    char ch=
+                }
+
             }
-             for(int j=0,y=n-1; j<n/2; j++,y--)
+            for(int j=0,y=n-1; j<n/2; j++,y--)
             {
                 if(s[j][i]!=s[y][i])
                     k++;
